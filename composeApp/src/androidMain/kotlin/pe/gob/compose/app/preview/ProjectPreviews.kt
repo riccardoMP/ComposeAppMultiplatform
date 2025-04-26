@@ -6,9 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pe.gob.compose.app.model.Expense
-import pe.gob.compose.app.model.ExpenseCategory
+import pe.gob.compose.app.data.ExpenseManager
+import pe.gob.compose.app.presentation.ExpensesUiState
 import pe.gob.compose.app.ui.AlLExpensesHeader
+import pe.gob.compose.app.ui.ExpenseScreen
 import pe.gob.compose.app.ui.ExpensesItem
 import pe.gob.compose.app.ui.ExpensesTotalHeader
 
@@ -33,11 +34,18 @@ private fun AllExpensesHeaderPreview() {
 private fun ExpensesItemPreview() {
     Box(modifier = Modifier.padding(8.dp)) {
         ExpensesItem(
-            expense = Expense(
-                amount = 20.0,
-                description = "Description",
-                category = ExpenseCategory.PARTY
-            )
+            expense = ExpenseManager.fakeExpenseList[0]
         ) { }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ExpenseScreenPreview() {
+    ExpenseScreen(
+        uiState = ExpensesUiState(
+            expenses = ExpenseManager.fakeExpenseList,
+            total = 1023.4
+        )
+    ) { }
 }

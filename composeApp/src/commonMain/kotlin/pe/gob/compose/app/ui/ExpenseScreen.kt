@@ -31,11 +31,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pe.gob.compose.app.getColorsTheme
 import pe.gob.compose.app.model.Expense
+import pe.gob.compose.app.presentation.ExpensesUiState
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ExpenseScreen() {
+fun ExpenseScreen(uiState: ExpensesUiState, onExpenseClick: (Expense) -> Unit) {
     val colors = getColorsTheme()
 
     LazyColumn(
@@ -45,13 +46,13 @@ fun ExpenseScreen() {
 
         stickyHeader {
             Column(modifier = Modifier.background(colors.backgroundColor)) {
-                ExpensesTotalHeader(1023.4)
+                ExpensesTotalHeader(uiState.total)
                 AlLExpensesHeader()
             }
         }
 
-        items(emptyList<String>()) {
-            //Composable
+        items(uiState.expenses) { expense ->
+            ExpensesItem(expense = expense, onExpenseClick = onExpenseClick)
         }
     }
 }
