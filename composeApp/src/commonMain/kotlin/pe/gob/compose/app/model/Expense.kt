@@ -1,7 +1,6 @@
 package pe.gob.compose.app.model
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Coffee
 import androidx.compose.material.icons.filled.ElectricCar
 import androidx.compose.material.icons.filled.Fastfood

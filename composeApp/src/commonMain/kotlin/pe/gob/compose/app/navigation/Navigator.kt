@@ -14,6 +14,8 @@ import pe.gob.compose.app.presentation.ExpensesViewModel
 import pe.gob.compose.app.ui.ExpenseScreen
 import androidx.compose.runtime.getValue
 import moe.tlaster.precompose.navigation.path
+import pe.gob.compose.app.model.Expense
+import pe.gob.compose.app.ui.ExpensesDetailScreen
 
 @Composable
 fun Navigation(navigator: Navigator) {
@@ -36,11 +38,23 @@ fun Navigation(navigator: Navigator) {
             }
         }
 
-        scene(route = "/addExpenses/{id}") {
+        scene(route = "/addExpenses/{id}?") {
             val idFromPath = it.path<Long>("id")
-            val isAddExpense = idFromPath?.let { id-> viewModel.getExpensesWithId(id) }
+            val expenseToEditOrAdd: Expense? =
+                idFromPath?.let { id -> viewModel.getExpensesWithId(id) }
 
+            ExpensesDetailScreen(
+                expenseToEdit = expenseToEditOrAdd,
+                categoryList = viewModel.getCategories()
+            ) { expense ->
+                if (expenseToEditOrAdd == null) {
+                    viewModel.addExpense(expense)
+                } else {
+                    viewModel.editExpense(expense)
+                }
 
+                navigator.popBackStack()
+            }
 
         }
     }

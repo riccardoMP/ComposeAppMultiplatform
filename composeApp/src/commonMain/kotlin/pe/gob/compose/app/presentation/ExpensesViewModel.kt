@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.viewModelScope
 import pe.gob.compose.app.domain.ExpenseRepository
 import pe.gob.compose.app.model.Expense
+import pe.gob.compose.app.model.ExpenseCategory
 
 data class ExpensesUiState(
     val expenses: List<Expense> = emptyList(),
@@ -55,5 +56,9 @@ class ExpensesViewModel(private val repository: ExpenseRepository) :
 
     fun getExpensesWithId(id: Long): Expense? {
         return allExpenses.find { it.id == id }
+    }
+
+    fun getCategories(): List<ExpenseCategory> {
+        return repository.getCategories()
     }
 }

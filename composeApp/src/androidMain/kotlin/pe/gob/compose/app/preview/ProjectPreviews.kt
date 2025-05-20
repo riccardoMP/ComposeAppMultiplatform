@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import pe.gob.compose.app.data.ExpenseManager
 import pe.gob.compose.app.presentation.ExpensesUiState
 import pe.gob.compose.app.ui.AlLExpensesHeader
+import pe.gob.compose.app.ui.ExpenseAmount
 import pe.gob.compose.app.ui.ExpenseScreen
 import pe.gob.compose.app.ui.ExpensesItem
 import pe.gob.compose.app.ui.ExpensesTotalHeader
@@ -48,4 +49,10 @@ private fun ExpenseScreenPreview() {
             total = 1023.4
         )
     ) { }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ExpenseAmountPreview() {
+    ExpenseAmount(priceContent = 12.0, onPriceChang = {}, keyboardController = null)
 }
